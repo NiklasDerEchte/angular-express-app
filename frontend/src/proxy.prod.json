@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://<backend_url>/api/",
+    "secure": true
+  }
+}

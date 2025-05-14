@@ -1,0 +1,22 @@
+@use '@angular/material' as mat;
+@use '../variables' as *;
+
+$light-theme: mat.define-theme((color: (theme-type: light,
+  primary: mat.$azure-palette,
+  tertiary: mat.$blue-palette,
+)));
+
+@mixin theme-change() {
+  mat-toolbar {
+    --mat-toolbar-container-background-color: #{mat.get-theme-color($light-theme, primary, 90)};
+    --mat-toolbar-container-text-color: #{mat.get-theme-color($light-theme, primary, 40)};
+    height: $toolbar-height;
+  }
+  html, body {
+    background: #{mat.get-theme-color($light-theme, neutral, 98)};
+  }
+
+  .sidenav-container {
+    --mat-sidenav-container-background-color: #{mat.get-theme-color($light-theme, neutral, 95)} !important;
+  }
+}

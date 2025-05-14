@@ -1,0 +1,28 @@
+@use '@angular/material' as mat;
+@use './themes/dark-theme' as dark-theme;
+@use './themes/light-theme' as light-theme;
+@use 'variables' as *;
+
+.content-view {
+  height: calc(100vh - $toolbar-height);
+}
+
+// include libx and backwards compatibility
+@include mat.core();
+@include mat.color-variants-backwards-compatibility(light-theme.$light-theme);
+
+// classes to use the theme
+.dark-theme {
+  @include mat.all-component-colors(dark-theme.$dark-theme);
+  @include dark-theme.theme-change();
+}
+
+.light-theme {
+  @include mat.all-component-themes(light-theme.$light-theme);
+  @include light-theme.theme-change();
+}
+
+// root settings
+:root { }
+
+
