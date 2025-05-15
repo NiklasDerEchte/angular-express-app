@@ -1,9 +1,14 @@
+import { Message } from '@shared/types';
 import { Router } from 'express';
 
 const router = Router();
 
 router.get('/', (req, res) => {
-  res.json([{ id: 1, name: 'Alice' }, { id: 2, name: 'Bob' }]);
+  let messages = [
+    new Message('Lorem ipsum dolor sit amet, consectetur adipiscing elit.', new Date()),
+    new Message('Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', new Date())
+  ];
+  res.json(messages);
 });
 
 router.post('/', (req, res) => {
