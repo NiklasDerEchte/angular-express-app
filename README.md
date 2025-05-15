@@ -1,53 +1,169 @@
-# Fullstack Angular-Express Project-Structure
+# Fullstack Angular-Express.js Project-Structure
+
+A proven fullstack project structure, optimized for medium-sized single-page applications (SPA) to large-scale software projects. The frontend and backend are separated but can share common entities.
+
+# Structure
 
 
-# Install dependencies
+| Service                              | Port | Path | Description                                     | Developing                                  | Production     |
+| :------------------------------------- | ------ | ------ | ------------------------------------------------- | --------------------------------------------- | ---------------- |
+| [Angular](https://angular.dev/)      | 4200 | /    | Frontend                                        | ng serve                                    | docker - nginx |
+| [Express.js](https://expressjs.com/) | 3000 | /api | Backend                                         | ts-node-dev                                 | docker - nginx |
+| Proxy Reverse                        | 80   | /*   | SSL handling -<br />routing to Frontend/Backend | (handled by[Angular](https://angular.dev/)) | docker - nginx |
+
+> **Note**
+> Express.js is a fully capable web server and can theoretically run standalone without Nginx. However, handling SSL directly with Express.js can be more complex compared to using a dedicated reverse proxy server.
+
+# Developing
+
+Setup for developing
+
+## Install dependencies
 
 To install the necessary dependencies for both the backend and frontend and from the root to start the development server simultaneously, run the following commands:
 
-```
+```bash
 cd backend
-npm install
+npm install # install backend dependencies
 cd ..
 cd frontend
-npm install
+npm install # install frontend dependencies
 cd ..
-npm install
+npm install # install dev dependencies
 ```
 
-# Run development mode
+## Run development mode
 
 To start the development server, use the following command:
 
-```
+```bash
 npm run dev
 ```
 
-# Build
+# Production
+
+For the **reverse proxy server**, you could use [nginx/docker](https://hub.docker.com/_/nginx): `docker pull nginx:latest`.
+
+A configuration for SSL handling and routing between the frontend and backend can be found under `.prod/etc/nginx/sites-available/example.conf`.
+For SSL, [Certbot](https://certbot.eff.org/) is required.
+
+## SSL Certificate Setup
+
+To set up SSL certificates using [Certbot](https://certbot.eff.org/), follow these steps:
+
+### Update and Install Certbot
+
+Run the following commands to update your system and install [Certbot](https://certbot.eff.org/) along with the necessary Nginx plugin:
+
+```bash
+sudo apt update
+sudo apt install certbot
+sudo apt install certbot python3-certbot-nginx
+```
+
+### Obtain an SSL Certificate
+
+Use Certbot to obtain an SSL certificate for your domain:
+
+```bash
+sudo certbot certonly --standalone -d example.com
+```
+
+### Automatic Renewal
+
+To ensure your SSL certificates are renewed automatically, add a cron job:
+
+1. Open the crontab editor:
+
+   ```bash
+   sudo crontab -e
+   ```
+2. Add the following line to schedule automatic renewal at 3:00 AM daily:
+
+   ```bash
+   0 3 * * * certbot renew --quiet
+   ```
+
+   > **Note:** By default, SSL certificates issued by Certbot are valid for 90 days. Regular renewal ensures uninterrupted service.
+   >
+
+## Proxy
+
+To enable communication between the frontend and backend through a single URL, some redirections are required.
+
+On the live server, three services are running:
+
+- **Angular**: Port 4200
+- **Express.js**: Port 3000
+- **Proxy**: Port 80
+
+### Setting Up API Routes
+
+In the `frontend/src/environments` directory, the base API routes are defined. These routes allow the frontend to communicate with the backend. They also point to the frontend itself, as a proxy will later redirect these requests to another service.
+
+Example for development:
 
 ```
-npm run build
+[localhost:4200 | production_url]/api/
 ```
 
-# Proxy
+### Local Development Proxy
 
-Um eine Kommunikation um Frontend und Backend über eine URL zur Verfügung zu stellen, benötigt es ein paar umleitungen.
+In `frontend/src/proxy.conf.json`, the path `/api/` is removed to enable access to the local backend during development.
 
-Auf dem live-server existieren 3 dienste:
-Angular: 4200
-Express: 3000
-Proxy: 80
+Example:
 
-Unter frontend/src/environments werden die basis-api routen festgelegt mit dem das frontend, das backend aufrufen soll. Sie weisen auch auf das frontend selbst, da ein Proxy später diese anfragen an einen anderen dienst umleitet.
+```
+[localhost:3000](/)
+```
 
-<localhost:4200|production_url>/api/
+### Production Proxy Configuration
 
-Unter frontend/src/proxy.conf.json wird nun der pfad "/api/" entfernt, damit auf das lokale backend zugegriffen werden kann.
+In production mode, the `frontend/src/proxy.prod.json` file is used. It redirects requests with the path `/api/` to the backend using an Nginx proxy server.
 
-<localhost:3000>/
+Example:
 
-Im production mode wird die frontend/src/proxy.prod.json verwendet. Sie leitet den aufruf mit dem pfad "/api/" weiter an das backend mit einem nginx proxy server.
+```
+[production_url]/api/
+```
 
-<production_url>/api/
+The [proxy server](#production) forwards requests with the `/api/` path to the backend, which is running on port 3000, by mapping them to the root path `/`.
 
-Der Proxy Server leitet "/api/" nun auf das backend 3000 weiter
+## Build and Run with Docker
+
+To build and run the application using Docker, follow these steps:
+
+### Clone the Repository
+
+Clone the project repository to your server:
+
+```bash
+echo "start cloning..."
+git clone git@github.com:NiklasDerEchte/angular-express-app.git ng-express
+cd ng-express/
+```
+
+### Build Docker Images
+
+Build the Docker images for the backend and frontend:
+
+```bash
+echo "building backend docker image..."
+docker build --no-cache -t niklasderechte/backend:v0.1.0 backend/
+
+echo "building frontend docker image..."
+docker build --no-cache -t niklasderechte/frontend:v0.1.0 frontend/
+```
+
+### Run Docker Containers
+
+Start the Docker containers for the backend and frontend:
+
+```bash
+echo "start docker container..."
+docker run --name frontend -d -p 4200:80 niklasderechte/frontend:v0.1.0
+docker run --name backend -d -p 3000:80 niklasderechte/backend:v0.1.0
+
+docker start frontend
+docker start backend
+```

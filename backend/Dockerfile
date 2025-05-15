@@ -1,11 +1,11 @@
-FROM node:lts AS builder
+FROM node:lts AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm install --save
+RUN npm install
 COPY . .
-RUN npx ng build --configuration=production
+RUN npm run build
 FROM nginx:latest
 RUN rm -rf /usr/share/nginx/html/*
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf
 EXPOSE 80
