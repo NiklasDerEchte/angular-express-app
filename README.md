@@ -8,11 +8,8 @@ A proven fullstack project structure, optimized for medium-sized single-page app
 | Service                              | Port | Path | Description                                     | Developing                                  | Production     |
 | :------------------------------------- | ------ | ------ | ------------------------------------------------- | --------------------------------------------- | ---------------- |
 | [Angular](https://angular.dev/)      | 4200 | /    | Frontend                                        | ng serve                                    | docker - nginx |
-| [Express.js](https://expressjs.com/) | 3000 | /api | Backend                                         | ts-node-dev                                 | docker - nginx |
+| [Express.js](https://expressjs.com/) | 3000 | /api | Backend                                         | ts-node-dev                                 | docker - node  |
 | Proxy Reverse                        | 80   | /*   | SSL handling -<br />routing to Frontend/Backend | (handled by[Angular](https://angular.dev/)) | docker - nginx |
-
-> **Note**
-> Express.js is a fully capable web server and can theoretically run standalone without Nginx. However, handling SSL directly with Express.js can be more complex compared to using a dedicated reverse proxy server.
 
 # Developing
 
