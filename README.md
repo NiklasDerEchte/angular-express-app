@@ -146,10 +146,10 @@ Build the Docker images for the backend and frontend:
 
 ```bash
 echo "building backend docker image..."
-docker build --no-cache -t niklasderechte/backend:v0.1.0 backend/
+docker build --no-cache -f backend/Dockerfile -t niklasderechte/backend:v0.1.0 .
 
 echo "building frontend docker image..."
-docker build --no-cache -t niklasderechte/frontend:v0.1.0 frontend/
+docker build --no-cache -f frontend/Dockerfile -t niklasderechte/frontend:v0.1.0 .
 ```
 
 ### Run Docker Containers
@@ -158,9 +158,6 @@ Start the Docker containers for the backend and frontend:
 
 ```bash
 echo "start docker container..."
-docker run --name frontend -d -p 4200:80 niklasderechte/frontend:v0.1.0
-docker run --name backend -d -p 3000:80 niklasderechte/backend:v0.1.0
-
-docker start frontend
-docker start backend
+docker run --name backend -d -p 3000:3000 niklasderechte/backend:v0.1.0
+docker run --name frontend -d -p 4200:4200 niklasderechte/frontend:v0.1.0
 ```

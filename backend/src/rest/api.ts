@@ -1,4 +1,4 @@
-import { Message } from '@shared/types';
+import { Message } from '../../../shared/types';
 import { Router } from 'express';
 
 const router = Router();

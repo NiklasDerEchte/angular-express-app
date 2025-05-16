@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Message } from '@shared/types';
+import { Message } from '../../../shared/types';
 import {MatListModule} from '@angular/material/list';
 
 @Component({
@@ -21,7 +21,7 @@ export class AppComponent {
     // This might look strange but makes sense.
     // To ensure both services run under a single url, they need different base paths. Hence the first /api. For more details, refer to the Readme.
     // The second /api is the actual path defined in the backend API.
-    this.http.get<Message[]>(`${environment.apiUrl}/api`).subscribe({
+    this.http.get<Message[]>(`${environment.apiUrl}api`).subscribe({
       next: (response) => {
         this.sharedMessages = response;
       },
