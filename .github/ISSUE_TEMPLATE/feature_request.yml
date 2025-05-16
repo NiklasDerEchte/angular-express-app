@@ -1,0 +1,43 @@
+name: 💡 Feature Request
+description: Suggest a new feature or enhancement.
+title: "[FEATURE] "
+labels: [enhancement]
+assignees: []
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a new feature! Please fill out the details below.
+
+  - type: input
+    id: feature
+    attributes:
+      label: Feature Summary
+      placeholder: "e.g., Add support for dark mode"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to Solve
+      placeholder: "Working at night is difficult due to the bright UI."
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      placeholder: "Implement a toggle for dark/light theme in settings."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      placeholder: "Use system dark mode, browser extensions, etc."
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional Context
+      placeholder: "Mockups, screenshots, or other related links."
