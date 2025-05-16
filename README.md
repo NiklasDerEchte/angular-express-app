@@ -53,7 +53,7 @@ For the **reverse proxy server**, you could use [nginx/docker](https://hub.docke
 A configuration for SSL handling and routing between the frontend and backend can be found under `.prod/etc/nginx/sites-available/example.conf`.
 For SSL, [Certbot](https://certbot.eff.org/) is required.
 
-> **Note:**Do not forget to replace all placeholder values such as `example.com` with your own domain name in the following files:
+> **Note:** Do not forget to replace all placeholder values such as `example.com` with your own domain name in the following files:
 >
 > - The **reverse proxy server** configuration file (`example.conf`)
 > - The frontend production **environment** file (`environments.prod.ts`)
