@@ -11,6 +11,15 @@ A proven fullstack project structure, optimized for medium-sized single-page app
 | [Express.js](https://expressjs.com/) | 3000 | /api | Backend                                         | ts-node-dev                                 | docker - node  |
 | Proxy Reverse                        | 80   | /*   | SSL handling -<br />routing to Frontend/Backend | (handled by[Angular](https://angular.dev/)) | docker - nginx |
 
+# Tested
+
+
+| System / OS        | Node.js Version | NPM Version | Angular CLI Version | Docker Version | Notes                                 |
+| -------------------- | ----------------- | ------------- | --------------------- | ---------------- | --------------------------------------- |
+| Windows 10         | 23.10.0         | 10.9.2      | 19.2.5              | -              | Local Development & Build             |
+| Ubuntu 22.04 LTS   | 23.11.0         | 10.9.2      | 19.2.7              | 25.x           | Local Development & Docker Production |
+| Ubuntu 24.04.2 LTS | 23.8.0          | 11.1.0      | 19.2.9              | 25.x           | Docker Production                     |
+
 # Developing
 
 Setup for developing
@@ -43,6 +52,12 @@ For the **reverse proxy server**, you could use [nginx/docker](https://hub.docke
 
 A configuration for SSL handling and routing between the frontend and backend can be found under `.prod/etc/nginx/sites-available/example.conf`.
 For SSL, [Certbot](https://certbot.eff.org/) is required.
+
+> **Note:**Do not forget to replace all placeholder values such as `example.com` with your own domain name in the following files:
+>
+> - The **reverse proxy server** configuration file (`example.conf`)
+> - The frontend production **environment** file (`environments.prod.ts`)
+> - The frontend production **proxy** configuration (`proxy.prod.json`)
 
 ## SSL Certificate Setup
 

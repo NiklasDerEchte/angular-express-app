@@ -7,7 +7,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
-ng serve
+npm run dev
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
@@ -35,6 +35,13 @@ ng build
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+> **Note:**  
+> Do not forget to replace all placeholder values such as `example.com` with your own domain name in the following files:
+> - The **reverse proxy server** configuration file (`example.conf`)
+> - The frontend production **environment** file (`environments.prod.ts`)
+> - The frontend production **proxy** configuration (`proxy.prod.json`)
+>
 
 ## Running unit tests
 
