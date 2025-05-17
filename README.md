@@ -24,6 +24,11 @@ A proven fullstack project structure, optimized for medium-sized single-page app
 
 Setup for developing
 
+```bash
+git clone git@github.com:NiklasDerEchte/angular-express-app.git ng-express
+cd ng-express/
+```
+
 ## Install dependencies
 
 To install the necessary dependencies for both the backend and frontend and from the root to start the development server simultaneously, run the following commands:
@@ -45,6 +50,10 @@ To start the development server, use the following command:
 ```bash
 npm run dev
 ```
+
+> **Note:** Run in the main directory to start both the frontend and backend, or run only in the frontend or only in the backend.
+>
+
 
 # Production
 
