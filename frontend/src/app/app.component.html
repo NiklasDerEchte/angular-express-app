@@ -343,4 +343,6 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-<router-outlet />
+<div [ngClass]="isDarkMode() ? 'dark-theme' : 'light-theme'">
+  <router-outlet></router-outlet>
+</div>

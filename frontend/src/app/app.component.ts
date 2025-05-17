@@ -3,18 +3,25 @@ import { RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Message } from '../../../shared/types';
-import {MatListModule} from '@angular/material/list';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatListModule],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MatListModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  static DarkMode: boolean = false;
   title = 'Hello, frontend!';
   sharedMessages: Message[] = [];
-  constructor(private http: HttpClient) {}
+
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     // The apiUrl already contains a /api, so the URL looks something like this: https://../api/api
@@ -29,5 +36,9 @@ export class AppComponent {
         console.error('Error fetching data from backend:', error);
       }
     });
+  }
+
+  isDarkMode() {
+    return AppComponent.DarkMode;
   }
 }
