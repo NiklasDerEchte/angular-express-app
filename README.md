@@ -185,3 +185,12 @@ echo "start docker container..."
 docker run --name backend -d -p 3000:3000 niklasderechte/backend:v0.1.0
 docker run --name frontend -d -p 4200:4200 niklasderechte/frontend:v0.1.0
 ```
+
+## Angular Material 3 Theming
+
+This project includes both light and dark themes using Angular Material 3 (M3).
+
+- You can easily extend or customize the theme system to add more styles or color schemes.
+- For a step-by-step guide on implementing and customizing Angular Material 3 theming, see the following article:
+
+   [Implementing Angular Material 3 Theming: Modern Light & Dark Modes](https://medium.com/@n.wocke/implementing-angular-material-3-theming-modern-light-dark-modes-by-niklas-wockenfu%C3%9F-de30c9b44be1) by Niklas Wockenfuß
