@@ -186,7 +186,7 @@ docker run --name backend -d -p 3000:3000 niklasderechte/backend:v0.1.0
 docker run --name frontend -d -p 4200:4200 niklasderechte/frontend:v0.1.0
 ```
 
-## Angular Material 3 Theming
+# Angular Material 3 Theming
 
 This project includes both light and dark themes using Angular Material 3 (M3).
 
