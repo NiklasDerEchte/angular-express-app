@@ -14,4 +14,4 @@ WORKDIR /app/backend
 RUN npm run build
 
 EXPOSE 3000
-CMD ["node", "./dist/backend/src/server.js"]
+CMD ["node", "./dist/server.js"]
