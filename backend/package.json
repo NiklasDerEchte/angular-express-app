@@ -1,7 +1,7 @@
 {
   "scripts": {
-    "esbuild:build:watch": "node esbuild.js --watch",
-    "esbuild:dev:watch": "node --watch dist/server.js",
+    "esbuild:build:watch": "node ./esbuild.js --watch",
+    "esbuild:dev:watch": "node --watch ./dist/server.js",
     "build": "node esbuild.js",
     "dev": "concurrently \"npm run esbuild:build:watch\" \"npm run esbuild:dev:watch\""
   },
