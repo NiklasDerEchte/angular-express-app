@@ -10,6 +10,7 @@ const config = {
   target: 'node20', // Your Node version
   outdir: 'dist', // Output directory
   packages: 'external', // node_modules are NOT bundled (standard for backend)
+  sourcemap: true, // Generate source maps for easier debugging
 };
 
 if (isDev) {
